@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowPreta Cosméticos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .cart-preview {
+            transition: all 0.3s ease;
+        }
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-rose-50">
+    <!-- Barra de navegação -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/06e153f5-6763-4928-b085-348ec99bb7f4.png" alt="Logo GlowPreta - Cosméticos de beleza premium" class="h-10">
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="text-gray-800 hover:text-rose-500 transition">Início</a>
+                <a href="#" class="text-gray-800 hover:text-amber-600 transition">Produtos</a>
+                <a href="#" class="text-gray-800 hover:text-amber-600 transition">Ofertas</a>
+                <a href="#" class="text-gray-800 hover:text-amber-600 transition">Contato</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="cartButton" class="relative">
+                    <i class="fas fa-shopping-cart text-2xl text-gray-700 hover:text-rose-500 transition"></i>
+                    <span id="cartCount" class="absolute -top-2 -right-2 bg-rose-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">0</span>
+                </button>
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-2xl text-gray-700"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carrinho flutuante -->
+    <div id="cartPreview" class="cart-preview fixed top-20 right-4 bg-white rounded-lg shadow-xl p-4 w-80 hidden z-50 border border-gray-200">
+        <h3 class="font-bold text-lg mb-4 flex justify-between">
+            <span>Seu Carrinho</span>
+            <button id="closeCart" class="text-gray-500 hover:text-red-500">
+                <i class="fas fa-times"></i>
+            </button>
+        </h3>
+        <div id="cartItems" class="max-h-64 overflow-y-auto">
+            <p class="text-gray-500 text-center py-8">Seu carrinho está vazio</p>
+        </div>
+        <div class="border-t border-gray-200 pt-4 mt-4">
+            <div class="flex justify-between mb-2">
+                <span>Total:</span>
+                <span id="cartTotal" class="font-bold">€ 0,00</span>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Banner principal -->
+    <section class="bg-gradient-to-r from-rose-400 to-rose-600 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 pulse">Ofertas Especiais!</h1>
+            <p class="text-xl mb-8">Até 50% de desconto em produtos selecionados</p>
+            <button class="bg-white text-amber-700 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition">
+                Compre Agora
+            </button>
+        </div>
+    </section>
+
+    <!-- Seção de produtos -->
+    <section class="py-12 container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Nossos Produtos</h2>
+        
+   
+        <!-- Grid de produtos -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <!-- Produto 1 -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                <div class="relative">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/79f7b904-7a12-4330-bd7b-d5d9437f58e1.png" alt="Smartphone moderno" class="w-full h-48 object-cover">
+                    <div class="absolute top-2 right-2 bg-amber-600 text-white px-2 py-1 rounded-full text-xs">20% OFF</div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">Smartphone Premium</h3>
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="text-gray-500 text-sm ml-2">(128)</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="text-gray-500 line-through">R$ 3.499</span>
+                            <span class="font-bold text-lg text-amber-600 ml-2">R$ 2.799</span>
+                        </div>
+                        <button onclick="addToCart('Smartphone Premium', 2799)" class="bg-rose-500 hover:bg-rose-600 text-white p-2 rounded-full transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 2 -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                <div class="relative">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/94e2ad91-132f-4d89-9b44-5af4a8ead3f3.png" alt="Relógio inteligente" class="w-full h-48 object-cover">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">Smartwatch</h3>
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="text-gray-500 text-sm ml-2">(87)</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="font-bold text-lg">R$ 899</span>
+                        </div>
+                        <button onclick="addToCart('Smartphone Premium', 2799)" class="bg-rose-500 hover:bg-rose-600 text-white p-2 rounded-full transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 3 -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                <div class="relative">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3bd0a35e-68f0-4e4d-afda-d299d86b0f05.png" alt="Fones Bluetooth" class="w-full h-48 object-cover">
+                    <div class="absolute top-2 right-2 bg-amber-600 text-white px-2 py-1 rounded-full text-xs">15% OFF</div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">Fones Bluetooth</h3>
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="text-gray-500 text-sm ml-2">(64)</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="text-gray-500 line-through">R$ 699</span>
+                            <span class="font-bold text-lg text-amber-600 ml-2">R$ 594</span>
+                        </div>
+                        <button onclick="addToCart('Smartphone Premium', 2799)" class="bg-rose-500 hover:bg-rose-600 text-white p-2 rounded-full transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 4 -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                <div class="relative">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7f65163d-7281-4067-9624-5bd80753c5d8.png" alt="Notebook Pro" class="w-full h-48 object-cover">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">Notebook Pro</h3>
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="text-gray-500 text-sm ml-2">(112)</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="font-bold text-lg">R$ 5.299</span>
+                        </div>
+                        <button onclick="addToCart('Notebook Pro', 5299)" class="bg-amber-600 hover:bg-amber-700 text-white p-2 rounded-full transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    <!-- Rodapé -->
+    <footer class="bg-rose-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">GlowPreta</h3>
+                    <p class="text-gray-400">Cosméticos de beleza premium com qualidade excepcional</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Minha Conta</a></li>
+                        <li><a href="#" class="hover:text-white transition">Meus Pedidos</a></li>
+                        <li><a href="#" class="hover:text-white transition">Lista de Desejos</a></li>
+                        <li><a href="#" class="hover:text-white transition">Termos de Serviço</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Categorias</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Eletrônicos</a></li>
+                        <li><a href="#" class="hover:text-white transition">Moda</a></li>
+                        <li><a href="#" class="hover:text-white transition">Casa e Cozinha</a></li>
+                        <li><a href="#" class="hover:text-white transition">Beleza</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Contato</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> São Paulo, Brasil</li>
+                        <li><i class="fas fa-phone mr-2"></i> (11) 9876-5432</li>
+                        <li><i class="fas fa-envelope mr-2"></i> contato@premiumshop.com</li>
+                    </ul>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-white hover:text-amber-500 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white hover:text-amber-500 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white hover:text-amber-500 transition"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 GlowPreta. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+<script>
+    let cart = [];
+
+    const cartButton = document.getElementById('cartButton');
+    const cartPreview = document.getElementById('cartPreview');
+    const closeCart = document.getElementById('closeCart');
+
+    cartButton.addEventListener('click', () => {
+        cartPreview.classList.toggle('hidden');
+    });
+
+    closeCart.addEventListener('click', () => {
+        cartPreview.classList.add('hidden');
+    });
+
+    function addToCart(name, price) {
+        const button = event.currentTarget;
+        button.innerHTML = '<i class="fas fa-check"></i>';
+        button.classList.add('bg-green-500', 'hover:bg-green-600');
+
+        setTimeout(() => {
+            button.innerHTML = '<i class="fas fa-plus"></i>';
+            button.classList.remove('bg-green-500', 'hover:bg-green-600');
+        }, 1000);
+
+        cart.push({ name, price });
+        updateCart();
+
+        if (cartPreview.classList.contains('hidden')) {
+            cartPreview.classList.remove('hidden');
+        }
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
+
+        cartCount.textContent = cart.length;
+
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<p class="text-gray-500 text-center py-8">Seu carrinho está vazio</p>';
+            cartTotal.textContent = 'R$ 0,00';
+            return;
+        }
+
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        const formattedTotal = (total / 100).toFixed(2).replace('.', ',');
+        cartTotal.textContent = `€ ${formattedTotal}`;
+
+        cartItems.innerHTML = '';
+        cart.forEach((item, index) => {
+            const price = (item.price / 100).toFixed(2).replace('.', ',');
+            const itemElement = document.createElement('div');
+            itemElement.className = 'flex justify-between items-center py-2 border-b border-gray-200';
+            itemElement.innerHTML = `
+                <div>
+                    <h4 class="font-medium">${item.name}</h4>
+                    <p class="text-sm text-gray-500">R$ ${price}</p>
+                </div>
+                <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            cartItems.appendChild(itemElement);
+        });
+
+        // Adiciona botão de finalizar pedido
+        const checkoutButton = document.createElement('button');
+        checkoutButton.className = 'mt-4 w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700 transition';
+        checkoutButton.textContent = 'Finalizar Pedido via Instagram';
+        checkoutButton.onclick = shareOrderViaInstagram;
+        cartItems.appendChild(checkoutButton);
+    }
+
+    function shareOrderViaInstagram() {
+    const message = cart.map(item => `• ${item.name} - € ${(item.price / 100).toFixed(2).replace('.', ',')}`).join('\n');
+    const total = (cart.reduce((sum, item) => sum + item.price, 0) / 100).toFixed(2).replace('.', ',');
+
+    const finalMessage = `Olá! Gostaria de finalizar minha encomenda com os seguintes produtos:\n\n${message}\n\nTotal: R$ ${total}\n\nVou enviar agora o comprovativo de pagamento e o meu endereço completo.`;
+
+    // Copia a mensagem para a área de transferência
+    navigator.clipboard.writeText(finalMessage).then(() => {
+        alert("✅ Pedido copiado! Agora clique em OK para abrir o Instagram e colar a mensagem no chat da @glowpreta.");
+        // Abre o direct da Glow Preta
+        window.open("https://www.instagram.com/glowpreta/", "_blank");
+    }).catch(err => {
+        alert("Erro ao copiar pedido. Tente novamente.");
+        console.error(err);
+    });
+}
+
+
+
+        // Simulação de checkout
+        const checkoutButton = document.querySelector('#cartPreview button:last-child');
+        checkoutButton.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            
+            // Aqui você normalmente integraria com um gateway de pagamento
+            alert('Compra finalizada com sucesso! Obrigado por comprar conosco.');
+            cart = [];
+            updateCart();
+        });
+    </script>
+</body>
+</html>
+
