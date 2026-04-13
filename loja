@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLOWPRETA - Gloss Premium</title>
+  <meta name="description" content="Glosses premium com brilho intenso e fragrância irresistível. GlowPreta - brilho, elegância e confiança.">
+  
+  <!-- FAVICON & PRELOAD -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💄</text></svg>">
+  <link rel="preload" href="videoo.mp4" as="video">
+
+  <style>
+    :root {
+      --primary: #d5618f;
+      --primary-dark: #b84d77;
+      --dark: #111;
+      --light: #fff0f6;
+      --white: #ffffff;
+      --shadow: 0 20px 60px rgba(213, 97, 143, 0.15);
+      --shadow-light: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    *, *::before, *::after {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: var(--light);
+      color: #222;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* HEADER PREMIUM */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-bottom: 1px solid rgba(213, 97, 143, 0.1);
+    }
+
+    header.scrolled {
+      padding: 0.8rem 5%;
+      box-shadow: var(--shadow-light);
+      backdrop-filter: blur(30px);
+    }
+
+    .logo {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+
+    .logo .black { color: #000; }
+    .logo .pink { 
+      background: linear-gradient(135deg, var(--primary), #e57ba6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #444;
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+
+    nav a:hover { color: var(--primary); }
+
+    /* HAMBURGER MOBILE */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary);
+      transition: 0.3s;
+    }
+
+    /* HERO ULTRA */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: clamp(70vh, 90vw, 85vh);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      will-change: transform;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(0,0,0,0.7) 0%, 
+        rgba(213,97,143,0.4) 50%, 
+        rgba(0,0,0,0.6) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: min(90vw, 800px);
+      padding: 2rem;
+      animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero h2 {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      margin-bottom: 2rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 2.5rem;
+      background: rgba(255,255,255,0.95);
+      color: var(--primary);
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 70px rgba(213,97,143,0.3);
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: clamp(80px, 12vw, 120px) 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      text-align: center;
+      margin-bottom: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* PRODUCTS PREMIUM */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: var(--shadow-light);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(213,97,143,0.1);
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-12px);
+      box-shadow: var(--shadow);
+    }
+
+    .product-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 1.5rem;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+
+    .product-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+
+    .product-price {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-secondary {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(213,97,143,0.4);
+    }
+
+    /* TICKER MELHORADO */
+    .ticker {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      padding: 1.5rem 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ticker::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255,255,255,0.1) 50%, 
+        transparent 100%);
+      animation: shimmer 3s infinite;
+      pointer-events: none;
+    }
+
+    .ticker-content {
+      display: flex;
+      animation: scroll 25s linear infinite;
+      gap: 4rem;
+    }
+
+    .ticker-content span {
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 500;
+      white-space: nowrap;
+      padding: 0 2rem;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @keyframes shimmer {
+      0%, 100% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+    }
+
+    /* CONTACT FORM PREMIUM */
+    .contact-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: var(--white);
+      padding: 3rem;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(213,97,143,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border: 2px solid rgba(213,97,143,0.2);
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.8);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(213,97,143,0.1);
+      transform: translateY(-1px);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 1rem;
+      left: 1.2rem;
+      color: #666;
+      font-size: 0.9rem;
+      font-weight: 500;
+      pointer-events: none;
+      transition: 0.3s ease;
+    }
+
+    .form-group:focus-within label {
+      top: -0.5rem;
+      left: 0.8rem;
+      font-size: 0.75rem;
+      color: var(--primary);
+      background: var(--white);
+      padding: 0 0.3rem;
+    }
+
+    #status {
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 500;
+      margin-top: 1rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+    }
+
+    #status.success {
+      background: rgba(34,197,94,0.2);
+      color: #059669;
+      border: 1px solid rgba(34,197,94,0.3);
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVO PERFEITO */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav { 
+        display: none;
+        position: fixed;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 2rem;
+        box-shadow: var(--shadow-light);
+      }
+      nav.active { display: flex; }
+      
+      .hero h2 { font-size: 2.8rem; }
+      .products-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+      .section { padding: 60px 5%; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { height: 70vh; }
+      .product-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header id="header">
+    <a href="#inicio" class="logo">
+      <span class="black">G</span><span class="pink">LOW</span>
+      <span class="black">P</span><span class="pink">RETA</span>
+    </a>
+    
+    <nav id="nav">
+      <a href="#inicio" class="nav-link active">Início</a>
+      <a href="#produtos" class="nav-link">Gloss</a>
+      <a href="#contacto" class="nav-link">Contacto</a>
+    </nav>
+    
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="videoo.mp4" type="video/mp4">
+      <!-- FALLBACK VIDEO PLACEHOLDER -->
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:white;font-size:1.2rem;">
+        💄 GlowPreta
+      </div>
+    </video>
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-content">
+      
+      <p>Glosses premium com brilho intenso e fragrância irresistível. Brilho, elegância e confiança em cada aplicação.</p>
+      <a href="#produtos" class="btn-primary"> Explorar Coleção</a>
+    </div>
+  </section>
+
+  <!-- PRODUTOS -->
+  <section class="section" id="produtos">
+    <h2 class="section-title fade-in">Coleção Premium</h2>
+    
+    <div class="products-grid">
+      <div class="product-card fade-in">
+        <img src="img/gloss1.jpg" alt="Gloss Glow Pink" class="product-image" loading="lazy">
+        <h3 class="product-title">Glow Pink</h3>
+        <div class="product-price">€8.99</div>
+        <button class="btn-secondary" onclick="addToCart('Glow Pink', 8.99)">🛒 Adicionar</button>
+      </div>
+
+      <div class="product-card fade-in">
+        <img src="img/gloss2.jpg" alt="Gloss Strawberry Shine" class="product-image" loading="lazy">
+        <h3 class="product-title">Strawberry Shine</h3>
+        <div class="product-price">€9.99</div>
+        <button class="btn-secondary" onclick="addToCart('Strawberry Shine', 9.99)">🛒 Adicionar</button>
+      </div>
+
+      <div class="product-card fade-in">
+        <img src="img/gloss3.jpg" alt="Gloss Crystal Glow" class="product-image" loading="lazy">
+                <h3 class="product-title">Crystal Glow</h3>
+        <div class="product-price">€10.99</div>
+        <button class="btn-secondary" onclick="addToCart('Crystal Glow', 10.99)">🛒 Adicionar</button>
+      </div>
+
+      <!-- NOVOS PRODUTOS -->
+      <div class="product-card fade-in">
+        <img src="img/gloss4.jpg" alt="Gloss Rose Gold" class="product-image" loading="lazy">
+        <h3 class="product-title">Rose Gold</h3>
+        <div class="product-price">€11.99</div>
+        <button class="btn-secondary" onclick="addToCart('Rose Gold', 11.99)">🛒 Adicionar</button>
+      </div>
+
+      <div class="product-card fade-in">
+        <img src="img/gloss5.jpg" alt="Gloss Diamond Shine" class="product-image" loading="lazy">
+        <h3 class="product-title">Diamond Shine</h3>
+        <div class="product-price">€12.99</div>
+        <button class="btn-secondary" onclick="addToCart('Diamond Shine', 12.99)">🛒 Adicionar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-content">
+      <span> GlowPreta — brilho, elegância e confiança em cada aplicação</span>
+      <span> Produtos premium para realçar a tua beleza natural</span>
+      <span>Fragrâncias irresistíveis e hidratação prolongada</span>
+      <span>Brilho intenso que dura o dia todo</span>
+      <span>GlowPreta — brilho, elegância e confiança em cada aplicação</span>
+      <span>Produtos premium para realçar a tua beleza natural</span>
+    </div>
+  </div>
+
+  <!-- CONTACTO -->
+  <section class="section" id="contacto">
+    <h2 class="section-title fade-in">Contacto</h2>
+    
+    <div class="contact-container fade-in">
+      <form id="contactForm">
+        <div class="form-group">
+          <input type="text" id="nome" required>
+          <label for="nome">Nome Completo</label>
+        </div>
+
+        <div class="form-group">
+          <select id="canal" required>
+            <option value="">Escolha o método</option>
+            <option value="whatsapp">📱 WhatsApp</option>
+            <option value="instagram">📸 Instagram</option>
+            <option value="email">✉️ Email</option>
+          </select>
+          <label for="canal">Método de Contacto</label>
+        </div>
+
+        <div class="form-group">
+          <input type="text" id="contactoObrigatorio" required>
+          <label id="contactoLabel" for="contactoObrigatorio">Contacto</label>
+        </div>
+
+        <div class="form-group">
+          <textarea id="mensagem" placeholder="Conta-nos o que precisas..." required></textarea>
+          <label for="mensagem">Mensagem</label>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+          🚀 Enviar Mensagem
+        </button>
+        
+        <div id="status"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: 3rem 5%;
+    margin-top: 5rem;
+  ">
+    <div style="
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.8;
+    ">
+      <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">
+        <span style="color: var(--primary);">GLOW</span>PRETA
+      </h3>
+      <p>💄 Brilho, elegância e confiança | Produtos premium para a tua beleza</p>
+      <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+        © 2024 GlowPreta. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 🎯 PERFORMANCE & INTERAÇÕES PREMIUM
+    
+    // HEADER SCROLL & NAV
+    const header = document.getElementById('header');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+      
+      // ACTIVE NAV LINK
+      let current = '';
+      const sections = document.querySelectorAll('section');
+      const scrollY = window.scrollY + 150;
+      
+      sections.forEach(section => {
+        if (scrollY >= section.offsetTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // MOBILE MENU
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      hamburger.classList.toggle('open');
+    });
+
+    // SMOOTH SCROLL
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        nav.classList.remove('active');
+        hamburger.classList.remove('open');
+      });
+    });
+
+    // DYNAMIC PLACEHOLDER
+    document.getElementById('canal').addEventListener('change', function() {
+      const input = document.getElementById('contactoObrigatorio');
+      const label = document.getElementById('contactoLabel');
+      
+      const placeholders = {
+        'whatsapp': '📱 Número WhatsApp (+351...)',
+        'instagram': '📸 @teuusername',
+        'email': '✉️ email@exemplo.com'
+      };
+      
+      input.placeholder = placeholders[this.value] || 'Contacto';
+      label.textContent = placeholders[this.value]?.split(' ')[1] || 'Contacto';
+    });
+
+    // FORM SUBMISSION
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const status = document.getElementById('status');
+      const formData = new FormData(this);
+      
+      status.innerHTML = '⏳ Enviando...';
+      status.className = 'success';
+      
+      // SIMULAÇÃO API (substitua pela sua)
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      status.innerHTML = '✅ Mensagem enviada com sucesso! Responderemos em breve.';
+      this.reset();
+    });
+
+    // CARRINHO SIMPLES
+    let cart = [];
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      
+      // TOAST NOTIFICATION
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        z-index: 2000;
+        transform: translateX(400px);
+        transition: transform 0.4s ease;
+        font-weight: 500;
+      `;
+      toast.innerHTML = `🛒 ${name} adicionado!`;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => toast.style.transform = 'translateX(0)', 100);
+      setTimeout(() => {
+        toast.style.transform = 'translateX(400px)';
+        setTimeout(() => document.body.removeChild(toast), 400);
+      }, 3000);
+      
+      // ATUALIZA HEADER (OPCIONAL)
+      console.log(`Carrinho: ${cart.length} itens | Total: €${total.toFixed(2)}`);
+    }
+
+    // ANIMAÇÕES SCROLL
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // VIDEO OPTIMIZAÇÃO
+    const video = document.querySelector('.hero-video');
+    if (video) {
+      video.addEventListener('loadeddata', () => {
+        video.style.opacity = '1';
+      });
+    }
+
+    // PRELOAD & PERFORMANCE
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
+
+    // PWA READY (OPCIONAL)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
+</body>
+</html>
